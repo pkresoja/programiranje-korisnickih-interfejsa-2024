@@ -8,5 +8,7 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: black;
+    background-color: #151515;
 }
+
+/* #000000, #151515, #f8a145, #f07900 and #d35100. */
