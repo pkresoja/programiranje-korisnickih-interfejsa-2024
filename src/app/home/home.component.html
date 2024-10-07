@@ -19,7 +19,7 @@
         </mat-card-actions>
     </mat-card>
 </div>
-<div class="container search-container">
+<div *ngIf="destinations" class="container search-container">
     <mat-card appearance="outlined" class="search-card">
         <mat-card-content>
             <h1>Search for your destination</h1>
