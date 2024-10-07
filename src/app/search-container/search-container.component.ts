@@ -28,4 +28,8 @@ export class SearchContainerComponent {
   @Input() destinations: string[] | undefined
   @Input() airlines: string[] | undefined
   @Input() flightClass: string[] | undefined
+  @Input() defaultDestination: string | null = null
+  @Input() defaultAirline: string | null = null
+  @Input() defaultFlightClass: string | null = null
+  @Input() defaultReturn: boolean | null = null
 }

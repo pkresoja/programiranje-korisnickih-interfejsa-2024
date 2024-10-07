@@ -5,28 +5,28 @@
             <form class="search-form">
                 <mat-form-field class="search-field">
                     <mat-label>Choose destination</mat-label>
-                    <mat-select>
+                    <mat-select [(value)]="defaultDestination">
                         <mat-option [value]="dest" *ngFor="let dest of destinations">{{dest}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="search-field">
                     <mat-label>Choose airline</mat-label>
-                    <mat-select>
+                    <mat-select [(value)]="defaultAirline">
                         <mat-option [value]="airlines" *ngFor="let airline of airlines">{{airline}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="search-field">
                     <mat-label>Choose class</mat-label>
-                    <mat-select>
+                    <mat-select [(value)]="defaultFlightClass">
                         <mat-option [value]="cls" *ngFor="let cls of flightClass">{{cls}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="search-field">
                     <mat-label>Return</mat-label>
-                    <mat-select>
+                    <mat-select [(value)]="defaultReturn">
                         <mat-option [value]="true">Yes</mat-option>
                         <mat-option [value]="false">No</mat-option>
                     </mat-select>
@@ -34,7 +34,7 @@
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <a mat-button [routerLink]="['/search']">
+            <a mat-button [routerLink]="['/search?destination='+defaultDestination+'&ariline='+defaultAirline]">
                 <i class="fa-solid fa-search"></i> Search now
             </a>
         </mat-card-actions>
