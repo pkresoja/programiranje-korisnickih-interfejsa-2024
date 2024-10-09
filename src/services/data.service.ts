@@ -18,4 +18,8 @@ export class DataService {
       'First Class', 'Business', 'Economy'
     ]
   }
+
+  public formatDate(iso: string) {
+    return new Date(iso).toLocaleString('sr-RS')
+  }
 }
