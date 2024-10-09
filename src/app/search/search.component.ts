@@ -1,14 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SearchContainerComponent } from "../search-container/search-container.component";
 import { WebService } from '../../services/web.service';
 import { DataService } from '../../services/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [SearchContainerComponent, HttpClientModule],
+  imports: [
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    HttpClientModule,
+    NgIf,
+    NgFor,
+    RouterLink
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
@@ -20,10 +33,10 @@ export class SearchComponent implements OnInit {
   public airlines: string[] = []
   public flightClass: string[] = []
 
-  public qDestination: string | null = null
-  public qAirline: string | null = null
-  public qFlightClass: string | null = null
-  public qIsReturn: boolean | null = null
+  public sDestination: string | null = null
+  public sAirline: string | null = null
+  public sFlightClass: string | null = null
+  public sReturn: boolean | null = null
 
   constructor(private route: ActivatedRoute) {
     this.webService = new WebService()
@@ -32,15 +45,30 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.qDestination = params['destination']
-      this.qAirline = params['airline']
-      this.qFlightClass = params['class']
-      this.qIsReturn = params['return']
+      this.sDestination = params['destination']
+      this.sAirline = params['airline']
+      this.sFlightClass = params['class']
+      this.sReturn = params['return']
     })
 
     this.webService.getAvailableDestinations().subscribe(rsp => this.destinations = rsp)
     this.airlines = this.dataService.getAirlines()
     this.flightClass = this.dataService.getFlightClass()
+  }
+
+  public doSearch() {
+    if (this.sDestination == null){
+      // @ts-ignore
+      Swal.fire({
+        title: 'Something went wrong',
+        text: 'Make sure to select a destination first',
+        icon: 'error',
+        confirmButtonText: 'I understand'
+      })
+      return
+    }
+    this.webService.getFlightsByDestination(this.sDestination!).subscribe(rsp=>console.log(rsp))
+    console.log(this.sDestination, this.sAirline, this.sFlightClass, this.sReturn)
   }
 
 }
