@@ -3,11 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { FlightModel } from '../../models/flight.model';
 import { WebService } from '../../services/web.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NgIf } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-flight',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, NgIf, MatCardModule],
   templateUrl: './flight.component.html',
   styleUrl: './flight.component.css'
 })
