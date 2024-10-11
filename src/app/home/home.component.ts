@@ -27,7 +27,7 @@ import { SearchContainerComponent } from "../search-container/search-container.c
     MatInputModule,
     MatSelectModule,
     SearchContainerComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -36,20 +36,15 @@ export class HomeComponent implements OnInit {
   public webService: WebService
   public dataService: DataService
   public recommended: FlightModel[] = []
-  public destinations: string[] = []
-  public airlines: string[] = []
-  public flightClass: string[] = []
 
   constructor() {
-    this.webService = new WebService()
-    this.dataService = new DataService()
+    this.webService = WebService.getInstance()
+    this.dataService = DataService.getInstance()
   }
 
   ngOnInit(): void {
-    this.webService.getRecommendedFlights().subscribe(rsp => this.recommended = rsp.content)
-    this.webService.getAvailableDestinations().subscribe(rsp => this.destinations = rsp)
-    this.airlines = this.dataService.getAirlines()
-    this.flightClass = this.dataService.getFlightClass()
+    this.webService.getRecommendedFlights()
+      .subscribe(rsp => this.recommended = rsp.content)
   }
 
 

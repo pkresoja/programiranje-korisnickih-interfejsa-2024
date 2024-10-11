@@ -41,4 +41,12 @@ p {
     gap: 5px;
 }
 
+.text-white {
+    color: white;
+}
+
+.text-orange {
+   color: #d35100
+}
+
 /* #000000, #151515, #f8a145, #f07900 and #d35100. */
