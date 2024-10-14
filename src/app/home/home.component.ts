@@ -11,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { WebService } from '../../services/web.service';
 import { DataService } from '../../services/data.service';
 import { SearchContainerComponent } from "../search-container/search-container.component";
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +26,8 @@ import { SearchContainerComponent } from "../search-container/search-container.c
     MatListModule,
     MatInputModule,
     MatSelectModule,
-    SearchContainerComponent
+    SearchContainerComponent,
+    NgxSkeletonLoaderModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

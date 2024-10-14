@@ -31,11 +31,11 @@ import { SearchContainerComponent } from "../search-container/search-container.c
     NgFor,
     RouterLink,
     SearchContainerComponent
-],
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
   private webService: WebService
   public dataService: DataService
@@ -46,6 +46,12 @@ export class SearchComponent {
     this.dataService = DataService.getInstance()
   }
 
+  ngOnInit(): void {
+    const criteria = this.dataService.getSearchCriteria()
+    if (criteria.destination)
+      this.loadTableData(criteria.destination)
+  }
+
   public displayedColumns: string[] = ['number', 'destination', 'scheduled', 'action'];
   public dataSource: MatTableDataSource<FlightModel> | null = null
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null
@@ -54,7 +60,6 @@ export class SearchComponent {
 
   public doSearch() {
     const criteria = this.dataService.getSearchCriteria()
-    console.log(criteria)
     if (criteria.destination == null) {
       // @ts-ignore
       Swal.fire({
@@ -65,7 +70,11 @@ export class SearchComponent {
       })
       return
     }
-    this.webService.getFlightsByDestination(criteria.destination).subscribe(rsp => {
+    this.loadTableData(criteria.destination)
+  }
+
+  private loadTableData(dest: string) {
+    this.webService.getFlightsByDestination(dest).subscribe(rsp => {
       this.dataSource = new MatTableDataSource<FlightModel>(rsp.content)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
