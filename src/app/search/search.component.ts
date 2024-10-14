@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit {
       this.loadTableData(criteria.destination)
   }
 
-  public displayedColumns: string[] = ['number', 'destination', 'scheduled', 'action'];
+  public displayedColumns: string[] = ['number', 'destination', 'scheduled', 'estimated', 'plane', 'gate', 'action'];
   public dataSource: MatTableDataSource<FlightModel> | null = null
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null
   @ViewChild(MatSort)
