@@ -14,6 +14,7 @@ import { FlightModel } from '../../models/flight.model';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SearchContainerComponent } from "../search-container/search-container.component";
+import { PageModel } from '../../models/page.model';
 
 @Component({
   selector: 'app-search',
@@ -39,6 +40,7 @@ export class SearchComponent implements OnInit {
 
   private webService: WebService
   public dataService: DataService
+  public data: PageModel<FlightModel> | null = null
   private _liveAnnouncer = inject(LiveAnnouncer);
 
   constructor() {
@@ -75,6 +77,7 @@ export class SearchComponent implements OnInit {
 
   private loadTableData(dest: string) {
     this.webService.getFlightsByDestination(dest).subscribe(rsp => {
+      this.data = rsp
       this.dataSource = new MatTableDataSource<FlightModel>(rsp.content)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
