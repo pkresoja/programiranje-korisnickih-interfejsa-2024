@@ -12,7 +12,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { FlightModel } from '../../models/flight.model';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SearchContainerComponent } from "../search-container/search-container.component";
 import { PageModel } from '../../models/page.model';
 
@@ -41,7 +40,6 @@ export class SearchComponent implements OnInit {
   private webService: WebService
   public dataService: DataService
   public data: PageModel<FlightModel> | null = null
-  private _liveAnnouncer = inject(LiveAnnouncer);
 
   constructor() {
     this.webService = WebService.getInstance()
@@ -86,11 +84,6 @@ export class SearchComponent implements OnInit {
 
   public announceSortChange(sortState: Sort) {
     return
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
   }
 
 }

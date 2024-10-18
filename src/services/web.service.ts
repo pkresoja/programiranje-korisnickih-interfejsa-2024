@@ -60,6 +60,15 @@ export class WebService {
     })
   }
 
+  public getFlightsForIds(arr: number[]) {
+    const url = `${this.baseUrl}/flight/list`
+    return this.client.post<FlightModel[]>(url, arr, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+  }
+
   public generateImageUrl(dest: string) {
     return `https://img.pequla.com/destination/${dest.split(' ')[0].toLowerCase()}.jpg`
   }

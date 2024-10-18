@@ -59,4 +59,11 @@ p {
     width: 100%;
 }
 
+.table-wrapper {
+    margin-top: 15px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* #000000, #151515, #f8a145, #f07900 and #d35100. */
